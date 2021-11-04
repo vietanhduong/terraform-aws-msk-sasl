@@ -28,7 +28,7 @@ variable "broker_type" {
 }
 
 variable "broker_volume_size" {
-  description = "MSK Broker volume size (Gi). Default: 512"
+  description = "MSK Broker volume size (GiB). Default: 512"
   type        = number
   default     = 512
 }
