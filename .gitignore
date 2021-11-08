@@ -42,3 +42,5 @@ kubeconfig_*
 
 **/charts
 Chart.lock
+
+*.pem

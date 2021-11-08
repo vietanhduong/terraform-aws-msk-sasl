@@ -36,12 +36,12 @@ resource "aws_security_group" "msk_sg" {
 resource "aws_msk_cluster" "this" {
   cluster_name           = var.cluster_name
   kafka_version          = var.kafka_version
-  number_of_broker_nodes = length(local.private_subnet_ids) * var.broker_count
+  number_of_broker_nodes = length(local.subnet_ids) * var.broker_count
 
   broker_node_group_info {
     instance_type   = var.broker_type
     ebs_volume_size = var.broker_volume_size
-    client_subnets  = local.private_subnet_ids
+    client_subnets  = local.subnet_ids
     security_groups = [aws_security_group.msk_sg.id]
   }
 

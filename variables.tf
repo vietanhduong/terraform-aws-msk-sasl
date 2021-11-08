@@ -51,6 +51,12 @@ variable "enable_proxy" {
   default     = false
 }
 
+variable "proxy_whitelist_ip" {
+  description = "Proxy Whitelist IP CIDR Range. Default is 0.0.0.0/0"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
 variable "sasl_username" {
   description = "MSK SASL SCRAM username"
   type        = string

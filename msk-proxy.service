@@ -1,0 +1,23 @@
+[Unit]
+Description=msk-proxy
+After=docker.service
+Requires=docker.service
+
+[Service]
+SyslogIdentifier=msk-proxy
+TimeoutStartSec=0
+Restart=always
+ExecStart=/usr/bin/docker run  --name %n \
+                --net host \
+                grepplabs/kafka-proxy:v0.3.0 server \
+<broker_url>
+                --dynamic-listeners-disable \
+                --debug-enable \
+                --tls-enable \
+                --proxy-listener-key-file "ssl.key" \
+                --proxy-listener-cert-file "server-cert.pem"
+ExecStartPre=-/usr/bin/docker stop -t 10 %n
+ExecStartPre=-/usr/bin/docker rm -f %n
+
+[Install]
+WantedBy=default.target
