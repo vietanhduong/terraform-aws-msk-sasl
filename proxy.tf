@@ -68,6 +68,7 @@ resource "aws_instance" "proxy" {
     Name = "${var.cluster_name}'s proxy"
   }
 
+  depends_on = [aws_msk_cluster.this]
 }
 
 resource "aws_eip" "proxy" {
@@ -105,5 +106,5 @@ resource "null_resource" "installer" {
     always_run = "${timestamp()}"
   }
 
-  depends_on = [aws_eip.proxy]
+  depends_on = [aws_eip.proxy, aws_msk_cluster.this]
 }
