@@ -1,9 +1,3 @@
-variable "region" {
-  description = "AWS Region. Default: ap-southeast-1"
-  type        = string
-  default     = "ap-southeast-1"
-}
-
 variable "vpc_id" {
   description = "VPC to which the MSK will be attached. Default is default VPC in the region"
   type        = string
