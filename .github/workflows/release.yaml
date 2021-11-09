@@ -25,15 +25,9 @@ jobs:
           git tag --annotate --message "Tag for release $tag" "$tag"
           git push origin "refs/tags/$tag"
 
-      - name: Compress source
-        run: |
-          tar -zcvf source.tar.gz ./*
-
       - name: Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           automatic_release_tag: latest
           repo_token: "${{ secrets.PAT }}"
           prerelease: false
-          files: |
-            *.tar.gz
