@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Tag
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+          tag='${{ github.event.inputs.version }}'
+          git tag --annotate --message "Tag for release $tag" "$tag"
+          git push origin "refs/tags/$tag"
+
+      - name: Compress source
+        run: |
+          tar -zcvf source.tar.gz .
+
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.PAT }}"
+          prerelease: false
+          files: |
+            *.tar.gz

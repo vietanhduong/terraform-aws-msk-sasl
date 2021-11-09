@@ -44,3 +44,4 @@ kubeconfig_*
 Chart.lock
 
 *.pem
+*.tar.gz
