@@ -27,11 +27,12 @@ jobs:
 
       - name: Compress source
         run: |
-          tar -zcvf source.tar.gz .
+          tar -zcvf source.tar.gz ./*
 
       - name: Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
+          automatic_release_tag: latest
           repo_token: "${{ secrets.PAT }}"
           prerelease: false
           files: |
