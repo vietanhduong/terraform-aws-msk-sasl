@@ -86,12 +86,12 @@ resource "null_resource" "installer" {
   }
 
   provisioner "file" {
-    source      = "setup.sh"
+    source      = "${path.module}/setup.sh"
     destination = "/tmp/setup.sh"
   }
 
   provisioner "file" {
-    source      = "msk-proxy.service"
+    source      = "${path.module}/msk-proxy.service"
     destination = "/tmp/msk-proxy.service.tpl"
   }
 
